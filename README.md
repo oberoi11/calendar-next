@@ -1,32 +1,156 @@
-# Interactive Wall Calendar
+# 🗓️ Interactive Wall Calendar Component
 
-A polished Next.js calendar component inspired by the provided physical wall calendar reference.
+A polished, responsive calendar component built with **Next.js (App Router)** and **React**, inspired by a physical wall calendar design.  
+The goal of this project was to translate a static visual reference into a fully interactive, user-friendly frontend component.
 
-## Features
-- Physical wall-calendar look with spiral rings and paper texture styling
-- Exact scenic hero image cropped from the provided reference image
-- Click-to-select date range with start, in-between, and end-day states
-- Notes panel tied to the visible month and selected date range
-- localStorage persistence
-- Responsive desktop/mobile layout
-- Month navigation
+---
 
-## Run locally
+## 🌟 Live Demo
+
+👉 https://your-vercel-link.vercel.app
+
+---
+
+## 🎥 Video Demonstration
+
+👉 https://your-video-link
+
+---
+
+## 📌 Overview
+
+This project replicates a **wall calendar aesthetic** with a strong emphasis on:
+
+- Visual hierarchy (hero image + calendar grid)
+- Interactive date range selection
+- Integrated notes system
+- Responsive layout across devices
+
+The component is designed to feel like a **digital version of a physical planner**, balancing design and usability.
+
+---
+
+## ✨ Features
+
+### 📅 Dynamic Calendar Grid
+- Generates calendar based on selected month and year
+- Correct weekday alignment
+- Handles varying month lengths automatically
+
+### 🔄 Month Navigation
+- Navigate between months using Previous / Next controls
+- Seamlessly handles year transitions using JavaScript Date API
+
+### 🎯 Date Range Selection
+- Select start and end date with intuitive clicks
+- Supports reversed selection (auto-corrects range)
+- Visual states:
+  - Start date
+  - End date
+  - Intermediate range
+
+### 📝 Integrated Notes Section
+- Allows users to add notes directly within the calendar
+- Keeps the experience similar to a real planner
+
+### 💾 Local Storage Persistence
+- Notes are saved in `localStorage`
+- Data persists even after page refresh
+- No backend required (frontend-only as per requirement)
+
+### 📱 Fully Responsive Design
+- **Desktop**: Side-by-side layout (image + calendar)
+- **Mobile**: Vertical stacked layout
+- Maintains usability across screen sizes
+
+---
+
+## 🎨 Design Approach
+
+The UI is inspired by a **physical wall calendar**, focusing on:
+
+- Large scenic hero image as a visual anchor
+- Paper-like background tones
+- Clean grid layout for dates
+- Integrated notes section to mimic planner usage
+
+The goal was to **balance aesthetics with functionality**, ensuring the component is both visually appealing and easy to use.
+
+---
+
+## 🧠 Technical Approach
+
+### State Management
+
+The component manages:
+
+- `currentDate` → controls visible month
+- `startDate` → start of selected range
+- `endDate` → end of selected range
+- `notes` → stored user input
+
+---
+
+### Calendar Generation Logic
+
+- Calculate first day of the month
+- Calculate total number of days
+- Fill leading empty cells for correct alignment
+- Render dynamic grid
+
+---
+
+### Range Selection Logic
+
+- First click → sets `startDate`
+- Second click → sets `endDate`
+- If second date < start date → swap automatically
+- Conditional rendering used to style:
+  - Start
+  - End
+  - Range
+
+---
+
+### Persistence Strategy
+
+- Used `localStorage` for storing notes
+- On component mount → retrieve stored notes
+- On update → sync back to storage
+
+This approach satisfies the **frontend-only constraint** of the assignment.
+
+---
+
+## 🧱 Component Architecture
+
+For this challenge, the logic is kept **self-contained** within a single component to:
+
+- Simplify state management
+- Speed up development
+- Keep interactions easy to reason about
+
+> In a production environment, this would be split into:
+- CalendarHeader
+- CalendarGrid
+- DayCell
+- NotesPanel
+
+---
+
+## 📦 Tech Stack
+
+- **Next.js (App Router)**
+- **React**
+- **TypeScript / JavaScript**
+- **CSS (custom styling)**
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
 ```bash
-npm install
-npm run dev
-```
-
-Then open `http://localhost:3000`
-
-## Project structure
-- `app/page.tsx` – page entry
-- `components/WallCalendar.tsx` – main interactive component
-- `app/globals.css` – complete styling
-- `public/calendar-hero.png` – scenic image cropped from the reference
-- `public/reference-calendar.png` – original reference image
-
-## Implementation choices
-- No backend used
-- Notes are stored in `localStorage`
-- Styling is custom CSS for maximum visual control instead of UI libraries
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
