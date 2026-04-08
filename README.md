@@ -16,7 +16,7 @@ The goal of this project was to translate a static visual reference into a fully
 
 ## 🎥 Video Demonstration
 
-👉 https://your-video-link
+👉 https://youtu.be/z56Gdeag72Y
 
 ---
 
