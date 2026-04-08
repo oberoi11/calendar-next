@@ -4,6 +4,9 @@ A polished, responsive calendar component built with **Next.js (App Router)** an
 The goal of this project was to translate a static visual reference into a fully interactive, user-friendly frontend component.
 
 ---
+## 📸 Preview
+
+![App Screenshot](./assests/screenshot.png)
 
 ## 🌟 Live Demo
 
