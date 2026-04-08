@@ -152,5 +152,5 @@ For this challenge, the logic is kept **self-contained** within a single compone
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/oberoi11/calendar-next.git
+cd calendar-next
