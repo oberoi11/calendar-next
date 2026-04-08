@@ -1,0 +1,521 @@
+:root {
+  --page-wood-1: #6c4831;
+  --page-wood-2: #4b2e1f;
+  --paper: #f2e8d7;
+  --paper-deep: #eadcc7;
+  --paper-shadow: #cfbba1;
+  --ink: #3b2a21;
+  --muted-ink: #6b5d52;
+  --line: rgba(111, 87, 62, 0.25);
+  --blue: #4a68ab;
+  --blue-deep: #2e4c91;
+  --pink: #efb0c1;
+  --pink-deep: #e6849f;
+  --cream: #f8f0e2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(24, 13, 8, 0.16), rgba(24, 13, 8, 0.16)),
+    radial-gradient(circle at top, #8a6144, #5f3c28 45%, #472a1c 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.scene-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+
+.calendar-board {
+  position: relative;
+  width: min(1320px, 100%);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05)),
+    linear-gradient(180deg, #f5ebda, #e9dbc4);
+  box-shadow:
+    0 30px 60px rgba(19, 8, 3, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 12px rgba(85, 54, 34, 0.18);
+  padding: 30px 26px 26px;
+  border: 1px solid rgba(129, 98, 76, 0.35);
+}
+
+.calendar-board::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px solid rgba(150, 120, 97, 0.18);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.spiral-bar {
+  position: absolute;
+  top: -17px;
+  left: 48px;
+  right: 48px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.spiral-ring {
+  width: 14px;
+  height: 40px;
+  border: 4px solid #5f5047;
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  filter: drop-shadow(0 4px 1px rgba(0, 0, 0, 0.35));
+  opacity: 0.95;
+}
+
+.calendar-panels {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.hero-panel {
+  min-height: 840px;
+  padding: 18px 12px 12px 12px;
+}
+
+.hero-frame {
+  position: relative;
+  min-height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(142, 104, 70, 0.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 16px 28px rgba(85, 58, 26, 0.18);
+}
+
+.hero-image {
+  object-fit: cover;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 218, 149, 0.1), rgba(255, 255, 255, 0)),
+    linear-gradient(0deg, rgba(33, 20, 12, 0.08), rgba(33, 20, 12, 0));
+}
+
+.details-panel {
+  background:
+    linear-gradient(180deg, rgba(249, 242, 228, 0.96), rgba(237, 226, 207, 0.98));
+  padding: 18px 22px 10px;
+  position: relative;
+}
+
+.details-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(130, 92, 58, 0.06) 0.8px, transparent 0.8px);
+  background-size: 8px 8px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.calendar-header,
+.weekday-row,
+.calendar-grid,
+.notes-card {
+  position: relative;
+  z-index: 1;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 110px 1fr 110px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.nav-button,
+.add-chip {
+  border: 1px solid rgba(129, 98, 76, 0.28);
+  background: linear-gradient(180deg, #fdf8ef, #ece1cf);
+  color: #27417f;
+  box-shadow: 0 4px 12px rgba(67, 43, 20, 0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.nav-button:hover,
+.add-chip:hover,
+.plus-button:hover,
+.day-cell:hover,
+.note-item button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(67, 43, 20, 0.14);
+}
+
+.title-wrap {
+  text-align: center;
+}
+
+.title-wrap h1,
+.notes-topbar h2 {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.title-wrap h1 {
+  font-size: clamp(2.6rem, 4vw, 4.8rem);
+  line-height: 1;
+  color: #2f4b89;
+  font-family: 'Snell Roundhand', 'Brush Script MT', cursive;
+}
+
+.title-wrap span {
+  display: inline-block;
+  width: 220px;
+  max-width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #cd7b7b, transparent);
+  margin-top: 8px;
+}
+
+.weekday-row,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday-row {
+  margin-bottom: 8px;
+  border-top: 2px solid rgba(100, 73, 52, 0.28);
+  border-bottom: 2px solid rgba(100, 73, 52, 0.18);
+}
+
+.weekday {
+  padding: 16px 8px 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #344f88;
+  font-weight: 700;
+}
+
+.weekday.sunday {
+  color: #b23d3d;
+}
+
+.calendar-grid {
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+
+.day-cell {
+  min-height: 104px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.day-cell.muted {
+  color: rgba(75, 54, 41, 0.28);
+}
+
+.day-number {
+  font-size: clamp(1.5rem, 2.3vw, 2.55rem);
+  line-height: 1;
+}
+
+.day-cell:nth-child(7n + 1) .day-number {
+  color: #b33f3f;
+}
+
+.day-cell.in-range {
+  background: linear-gradient(180deg, rgba(78, 111, 187, 0.92), rgba(52, 82, 155, 0.95));
+  color: #f8f2eb;
+}
+
+.day-cell.range-end {
+  background: linear-gradient(180deg, rgba(240, 182, 199, 0.96), rgba(229, 141, 165, 0.95));
+  color: #fff5f7;
+}
+
+.day-cell.range-start.single-day,
+.day-cell.range-end.single-day {
+  border-radius: 0;
+}
+
+.event-label {
+  position: absolute;
+  left: 10px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: calc(100% - 20px);
+  color: inherit;
+}
+
+.event-label small {
+  font-size: 0.64rem;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.note-dot {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ddb14c;
+  box-shadow: 0 0 0 3px rgba(255, 247, 226, 0.65);
+}
+
+.notes-card {
+  margin-top: 16px;
+  background: linear-gradient(180deg, #f8efde, #efe1c9);
+  border-radius: 0 0 18px 18px;
+  box-shadow:
+    0 20px 24px rgba(55, 34, 18, 0.13),
+    0 8px 0 rgba(217, 201, 177, 0.7),
+    0 16px 0 rgba(229, 215, 191, 0.65);
+  padding: 18px 20px 16px;
+  border: 1px solid rgba(129, 98, 76, 0.18);
+  position: relative;
+}
+
+.notes-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notes-topbar h2 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-family: 'Snell Roundhand', 'Brush Script MT', cursive;
+}
+
+.selection-pill {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed rgba(122, 95, 69, 0.35);
+  border-radius: 12px;
+  color: var(--muted-ink);
+  background: rgba(255, 252, 246, 0.55);
+}
+
+.notes-list {
+  margin: 14px 0 16px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.note-item,
+.empty-state {
+  background-image: linear-gradient(to right, rgba(152, 122, 92, 0.25) 40%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 9px 1px;
+  background-repeat: repeat-x;
+  padding-bottom: 10px;
+}
+
+.note-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.note-item p {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+.note-item span,
+.empty-state {
+  color: var(--muted-ink);
+  font-size: 0.92rem;
+}
+
+.note-item button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 0;
+  background: #e8d6bb;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #7c604f;
+}
+
+.note-composer {
+  display: grid;
+  grid-template-columns: 1fr 62px;
+  gap: 12px;
+}
+
+.note-composer input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(130, 100, 70, 0.25);
+  background: rgba(255, 251, 243, 0.85);
+  padding: 16px;
+  outline: none;
+  font-size: 1.05rem;
+}
+
+.note-composer input:focus {
+  border-color: rgba(72, 102, 175, 0.55);
+  box-shadow: 0 0 0 4px rgba(72, 102, 175, 0.12);
+}
+
+.plus-button {
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #6684cb, #4665af);
+  color: white;
+  font-size: 2.3rem;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(52, 79, 145, 0.24);
+}
+
+@media (max-width: 1180px) {
+  .calendar-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-panel {
+    min-height: 430px;
+    padding-bottom: 0;
+  }
+
+  .details-panel {
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .scene-shell {
+    padding: 14px;
+  }
+
+  .calendar-board {
+    padding: 24px 12px 12px;
+    border-radius: 18px;
+  }
+
+  .spiral-bar {
+    left: 18px;
+    right: 18px;
+  }
+
+  .spiral-ring {
+    width: 10px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  .hero-panel {
+    min-height: 310px;
+    padding: 8px;
+  }
+
+  .details-panel {
+    padding: 10px;
+  }
+
+  .calendar-header {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .title-wrap {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+
+  .nav-button {
+    padding: 10px 12px;
+  }
+
+  .weekday {
+    font-size: 0.9rem;
+    padding-top: 10px;
+  }
+
+  .day-cell {
+    min-height: 72px;
+    padding: 8px;
+  }
+
+  .day-number {
+    font-size: 1.28rem;
+  }
+
+  .event-label {
+    left: 7px;
+    right: 7px;
+    bottom: 7px;
+  }
+
+  .event-label small {
+    display: none;
+  }
+
+  .notes-card {
+    padding: 14px;
+    margin-top: 10px;
+  }
+
+  .notes-topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .add-chip,
+  .note-composer,
+  .note-composer input,
+  .plus-button {
+    width: 100%;
+  }
+
+  .note-composer {
+    grid-template-columns: 1fr;
+  }
+}
