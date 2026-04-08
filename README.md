@@ -7,7 +7,7 @@ The goal of this project was to translate a static visual reference into a fully
 
 ## 🌟 Live Demo
 
-👉 https://your-vercel-link.vercel.app
+👉 https://calendar-next-rbsq.vercel.app/
 
 ---
 
